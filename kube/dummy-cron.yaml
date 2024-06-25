@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: dummy-kubernetes-cronjob
+spec:
+  schedule: "*/5 * * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: dummy-kubernetes-cronjob
+              image: dummy-kubernetes-cronjob:1.0.0
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
+
